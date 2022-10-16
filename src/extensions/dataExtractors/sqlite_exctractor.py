@@ -1,6 +1,6 @@
-import extractor
+import extensions.dataExtractors.data_extractor as data_extractor
 
-class SqliteExtractor(extractor.Extractor) :
+class SqliteExtractor(data_extractor.Extractor) :
     _dataSourcePath = None
 
     def __init__(self, dataSourcePath) :

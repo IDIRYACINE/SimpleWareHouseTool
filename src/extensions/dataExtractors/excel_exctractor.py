@@ -1,6 +1,6 @@
-import extractor
+import extensions.dataExtractors.data_extractor as data_extractor
 
-class ExcelExtractor(extractor.Extractor) :
+class ExcelExtractor(data_extractor.Extractor) :
     _dataSourcePath = None
 
     def __init__(self, dataSourcePath) :

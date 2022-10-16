@@ -1,34 +1,38 @@
-import imp
+import extensions.dataExtractors.data_extractor as data_extractor , pandas as pd
 
+class CsvExtractor(data_extractor.Extractor) :
 
-import extractor
+    def __init__(self,columnsNames) :
+        self._columnsNames = columnsNames
+        
 
-class CsvExtractor(extractor.Extractor) :
-    _dataSourcePath = None
+    def extract_data(self,startRow, rowsNumToExtract) :
+        if(self._dataSourceFile == None) :
+            return None
+        self.extract_data =  pd.read_csv(
+            self._dataSourceFile, 
+            nrows=rowsNumToExtract,
+            skiprows=startRow,
+            usecols = self._columnsNames
+        )
 
-    def __init__(self, dataSourcePath) :
-        self._dataSourcePath = dataSourcePath
-
-    def extract_data(startRow, rowsNumToExtract) :
-        """Extract the data from the data source"""
-        pass
-
-    def open_data_source(self) :
-        """Open the data source"""
-        pass
+        return self.extract_data
+        
+    def open_data_source(self,dataSourcePath) :
+        self._dataSourceFile = dataSourcePath
 
     def close_data_source(self) :
-        """Close the data source"""
+        self._dataSourceFile = None
         pass
 
-    def save_extraction_progress(self) :
+    def save_extraction_progress() :
         """Save the extraction progress"""
         pass
 
-    def load_extraction_progress(self) :
+    def load_extraction_progress() :
         """Load the extraction progress"""
         pass
 
-    def resume_extraction(self) :
+    def resume_extraction() :
         """Resume the extraction"""
         pass

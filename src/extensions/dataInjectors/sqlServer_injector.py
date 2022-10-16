@@ -1,4 +1,4 @@
-import data_injector
+import data_injector, pyodbc 
 
 class MySqlServerInjector(data_injector.DatabaseInjector) :
 
@@ -26,4 +26,8 @@ class MySqlServerInjector(data_injector.DatabaseInjector) :
     
     def resume_injection(self) :
         """Resume the injection"""
+        pass
+
+    def _createDatabaseIfNotExists(self) :
+        """Create the database if it does not exist"""
         pass

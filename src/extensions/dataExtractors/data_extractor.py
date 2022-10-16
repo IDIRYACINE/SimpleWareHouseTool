@@ -3,27 +3,27 @@ from abc import ABC, abstractmethod
 class Extractor(ABC) :
 
     @abstractmethod
-    def exctract_data(startRow , rowsNumToExtract) :
+    def extract_data(self,startRow , rowsNumToExtract) :
         """Extract the data from the data source"""
         pass
 
     @abstractmethod
-    def open_data_source() :
+    def open_data_source(dataSourcePath) :
         """Open the data source"""
         pass
 
     @abstractmethod
-    def close_data_source() :
+    def close_data_source(self) :
         """Close the data source"""
         pass
 
     @abstractmethod
-    def save_exctraction_progress() :
+    def save_extraction_progress() :
         """Save the extraction progress"""
         pass
 
     @abstractmethod
-    def load_exctraction_progress() :
+    def load_extraction_progress() :
         """Load the extraction progress"""
         pass
 
