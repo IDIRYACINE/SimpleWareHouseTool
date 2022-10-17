@@ -1,29 +1,30 @@
-import data_transformer
-from models.sales_model import sales_model
+import time
+import extensions.dataTransfromers.data_transformer as data_transformer
+from core import utility
+import pandas as pd
+from models import sales_model
 
 class CsvTransformer(data_transformer.DataTransformer): 
 
-    def transformData(self,rawData):
+    def transformData(self,rawData : pd.DataFrame):
         transformedData = []
-
-        for row in rawData.iterrows():
-            transformedData.append(self._transformCsvRow(row))
-        
+        print(rawData.head())
+        for row in rawData.itertuples():
+            tRow = self._transformCsvRow(row)
+            transformedData.append(tRow)
         return transformedData
 
-    def _transformCsvRow(csvRow) :
-        quantity = csvRow[0]
-        unit_price = csvRow[1]
-        sales = csvRow[2]
-        date = csvRow[3]
-        status = csvRow[4]
-        product_code = csvRow[5]
-        customer_name = csvRow[6]
-        phone = csvRow[7]
-        city = csvRow[8]
-        state = csvRow[9]
-        country = csvRow[10]
-        postal_code = csvRow[11]
+    def _transformCsvRow(self,csvRow) :
+        date = utility.strToDate(csvRow.ORDERDATE)
+        date = utility.dateToTimestamp(date)
 
-        return sales_model.Sale(quantity,unit_price,postal_code,sales,date,status,phone,city,
-    state,country,customer_name,product_code)
+        quantity = csvRow.QUANTITYORDERED
+        sales = csvRow.SALES
+        status = utility.statusToCode(csvRow.STATUS)
+        product_code = csvRow.PRODUCTCODE
+        state = csvRow.STATE
+        country = csvRow.COUNTRY
+        postal_code = csvRow.POSTALCODE
+
+        return sales_model.Sale(quantity,postal_code,sales,date,status,
+    state,country,product_code)
