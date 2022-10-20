@@ -1,10 +1,8 @@
-import time
-import extensions.dataTransfromers.data_transformer as data_transformer
 from core import utility
 import pandas as pd
 from models import sales_model
 
-class CsvTransformer(data_transformer.DataTransformer): 
+class CsvTransformer(): 
 
     def transformData(self,rawData : pd.DataFrame):
         transformedData = []

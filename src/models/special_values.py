@@ -1,3 +1,4 @@
+from enum import Enum
 
 OrderStatusDictionary = {
     "In Process": 0,
@@ -5,5 +6,58 @@ OrderStatusDictionary = {
     "Shipped" : 2
 }
 
+ExcelDataColumnsDict = {
+    "A" : "ORDERNUMBER",
+    "B" : "QUANTITYORDERED",
+    "C" : "PRICEEACH",
+    "D" : "ORDERLINENUMBER",
+    "E" : "SALES",
+    "F" : "ORDERDATE",
+    "G" : "STATUS",
+    "H" : "QTR_ID",
+    "J" : "MONTH_ID",
+    "K" : "YEAR_ID",
+    "L" : "PRODUCTLINE",
+    "M" : "MSRP",
+    "N" : "PRODUCTCODE",
+    "O" : "CUSTOMERNAME",
+    "P" : "PHONE",
+    "Q" : "ADDRESSLINE1",
+    "R" : "ADDRESSLINE2",
+    "S" : "CITY",
+    "T" : "STATE",
+    "V" : "POSTALCODE",
+    "U" : "COUNTRY",
+    "W" : "TERRITORY",
+    "X" : "CONTACTLASTNAME",
+    "Y" : "CONTACTFIRSTNAME",
+    "Z" : "DEALSIZE"
+}
 
 
+class RawSaleColumnNames(Enum) :
+    ORDERNUMBER = "ORDERNUMBER"
+    QUANTITYORDERED = "QUANTITYORDERED"
+    PRICEEACH = "PRICEEACH"
+    ORDERLINENUMBER = "ORDERLINENUMBER"
+    SALES = "SALES"
+    ORDERDATE = "ORDERDATE"
+    STATUS = "STATUS"
+    QTR_ID = "QTR_ID"
+    MONTH_ID = "MONTH_ID"
+    YEAR_ID = "YEAR_ID"
+    PRODUCTLINE = "PRODUCTLINE"
+    MSRP = "MSRP"
+    PRODUCTCODE = "PRODUCTCODE"
+    CUSTOMERNAME = "CUSTOMERNAME"
+    PHONE = "PHONE"
+    ADDRESSLINE1 = "ADDRESSLINE1"
+    ADDRESSLINE2 = "ADDRESSLINE2"
+    CITY = "CITY"
+    STATE = "STATE"
+    POSTALCODE = "POSTALCODE"
+    COUNTRY = "COUNTRY"
+    TERRITORY = "TERRITORY"
+    CONTACTLASTNAME = "CONTACTLASTNAME"
+    CONTACTFIRSTNAME = "CONTACTFIRSTNAME"
+    DEALSIZE = "DEALSIZE"

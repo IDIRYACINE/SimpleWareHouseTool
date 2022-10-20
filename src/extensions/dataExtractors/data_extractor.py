@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
+from models.sales_model import Sale 
 
 class Extractor(ABC) :
 
     @abstractmethod
-    def extract_data(self,startRow , rowsNumToExtract) :
+    def extract_data(self,startRow , rowsNumToExtract) -> list[Sale] :
         """Extract the data from the data source"""
         pass
 
@@ -17,18 +18,4 @@ class Extractor(ABC) :
         """Close the data source"""
         pass
 
-    @abstractmethod
-    def save_extraction_progress() :
-        """Save the extraction progress"""
-        pass
-
-    @abstractmethod
-    def load_extraction_progress() :
-        """Load the extraction progress"""
-        pass
-
-    @abstractmethod
-    def resume_extraction() :
-        """Resume the extraction"""
-        pass    
     

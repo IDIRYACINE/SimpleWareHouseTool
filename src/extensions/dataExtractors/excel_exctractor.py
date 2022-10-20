@@ -1,31 +1,41 @@
 import extensions.dataExtractors.data_extractor as data_extractor
+from openpyxl import load_workbook
+from models.sales_model import Sale
+from models.special_values import ExcelDataColumnsDict
+from extensions.dataTransfromers.excel_transformer import ExcelTransformer
 
 class ExcelExtractor(data_extractor.Extractor) :
-    _dataSourcePath = None
 
-    def __init__(self, dataSourcePath) :
-        self._dataSourcePath = dataSourcePath
+    def __init__(self,columnsNames) :
+        self._columns = columnsNames
+        self._transformer = ExcelTransformer()
 
-    def extract_data(self, startRow, rowsNumToExtract) :
-        """Extract the data from the data source"""
-        pass
+    def extract_data(self,sheetName :str, startRow, rowsNumToExtract) -> list[Sale] :
+        worksheet = self._workBook[sheetName]
+        rowsIterator = worksheet.iter_rows(min_row=startRow, max_row=rowsNumToExtract + startRow, values_only=True)
+        
+        extractedData : list[Sale] = []
 
-    def open_data_source(self) :
-        """Open the data source"""
-        pass
+        rowExcelIndex = startRow
+        for row in rowsIterator :
+            extractedRow = self._extractCellsFromRow(row,rowExcelIndex)
+            extractedData.append(extractedRow)
+            rowExcelIndex = rowExcelIndex + 1
+
+        return self._transformer.transformData(extractedData)    
+
+    def open_data_source(self,dataSourcePath) :
+        self._workBook =  load_workbook(dataSourcePath , read_only=True)
 
     def close_data_source(self) :
-        """Close the data source"""
-        pass
+        self._workBook.close()
 
-    def save_extraction_progress(self) :
-        """Save the extraction progress"""
-        pass
+    def _extractCellsFromRow(self,row,rowIndex) :
+        extractedRow = {}
+        for column in self._columns :
+            cellId = column+rowIndex
+            columnName = ExcelDataColumnsDict[column]
+            extractedRow[columnName] = row[cellId]
+        return extractedRow
+        
 
-    def load_extraction_progress(self) :
-        """Load the extraction progress"""
-        pass
-
-    def resume_extraction(self) :
-        """Resume the extraction"""
-        pass
