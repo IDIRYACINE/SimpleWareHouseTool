@@ -79,7 +79,7 @@ class SqlServer(ISqlServer):
 
     def executeSelectQuery(self):
         cursor = self._conn.cursor()
-        cursor.execute("SELECT * FROM sales")
+        cursor.execute("SELECT * FROM Sales")
 
         result = []
         for row in cursor:
@@ -88,15 +88,14 @@ class SqlServer(ISqlServer):
         return result
 
     def _salesListToInsertQuery(self, sales: list[sales_model.Sale]) -> str:
-        query = "INSERT INTO sales (quantity, postal_code, sales, date, status, city, country,product_code) VALUES "
+        query = "INSERT INTO Sales (sale_quantity, postal_code, sale_profit, sale_date, sale_status, country,product_code) VALUES "
         for sale in sales:
-            query += "({0}, '{1}', '{2}', '{3}', {4}, '{5}', {6},{7}),".format(
+            query += "({0}, '{1}', '{2}', '{3}', {4}, '{5}','{6}'),".format(
                 sale.quantity,
                 sale.postal_code,
                 sale.sales,
                 sale.date,
                 sale.status,
-                sale.state,
                 sale.country,
                 sale.product_code
             )

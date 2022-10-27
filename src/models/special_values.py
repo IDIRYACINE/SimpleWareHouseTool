@@ -6,34 +6,6 @@ OrderStatusDictionary = {
     "Shipped" : 2
 }
 
-ExcelDataColumnsDict = {
-    "A" : "ORDERNUMBER",
-    "B" : "QUANTITYORDERED",
-    "C" : "PRICEEACH",
-    "D" : "ORDERLINENUMBER",
-    "E" : "SALES",
-    "F" : "ORDERDATE",
-    "G" : "STATUS",
-    "H" : "QTR_ID",
-    "J" : "MONTH_ID",
-    "K" : "YEAR_ID",
-    "L" : "PRODUCTLINE",
-    "M" : "MSRP",
-    "N" : "PRODUCTCODE",
-    "O" : "CUSTOMERNAME",
-    "P" : "PHONE",
-    "Q" : "ADDRESSLINE1",
-    "R" : "ADDRESSLINE2",
-    "S" : "CITY",
-    "T" : "STATE",
-    "V" : "POSTALCODE",
-    "U" : "COUNTRY",
-    "W" : "TERRITORY",
-    "X" : "CONTACTLASTNAME",
-    "Y" : "CONTACTFIRSTNAME",
-    "Z" : "DEALSIZE"
-}
-
 
 class RawSaleColumnNames(Enum) :
     ORDERNUMBER = "ORDERNUMBER"
@@ -61,3 +33,33 @@ class RawSaleColumnNames(Enum) :
     CONTACTLASTNAME = "CONTACTLASTNAME"
     CONTACTFIRSTNAME = "CONTACTFIRSTNAME"
     DEALSIZE = "DEALSIZE"
+
+ExcelDataColumnsDict = {
+    RawSaleColumnNames.ORDERNUMBER : "A",
+    RawSaleColumnNames.QUANTITYORDERED : "B",
+    RawSaleColumnNames.PRICEEACH : "C",
+    RawSaleColumnNames.ORDERLINENUMBER : "D",
+    RawSaleColumnNames.SALES : "E",
+    RawSaleColumnNames.ORDERDATE : "F",
+    RawSaleColumnNames.STATUS : "G",
+    RawSaleColumnNames.QTR_ID : "H",
+    RawSaleColumnNames.MONTH_ID : "I",
+    RawSaleColumnNames.YEAR_ID : "J",
+    RawSaleColumnNames.PRODUCTLINE : "K",
+    RawSaleColumnNames.MSRP : "L",
+    RawSaleColumnNames.PRODUCTCODE : "M",
+    RawSaleColumnNames.CUSTOMERNAME : "N",
+    RawSaleColumnNames.PHONE : "O",
+    RawSaleColumnNames.ADDRESSLINE1 : "P",
+    RawSaleColumnNames.ADDRESSLINE2 : "Q",
+    RawSaleColumnNames.CITY : "R",
+    RawSaleColumnNames.STATE : "S",
+    RawSaleColumnNames.POSTALCODE : "T",
+    RawSaleColumnNames.COUNTRY : "U",
+    RawSaleColumnNames.TERRITORY : "V",
+    RawSaleColumnNames.CONTACTLASTNAME : "W",
+    RawSaleColumnNames.CONTACTFIRSTNAME : "X",
+    RawSaleColumnNames.DEALSIZE : "Y"
+   
+}
+

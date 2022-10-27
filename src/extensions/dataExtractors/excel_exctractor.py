@@ -12,15 +12,12 @@ class ExcelExtractor(data_extractor.Extractor) :
 
     def extract_data(self,sheetName :str, startRow, rowsNumToExtract) -> list[Sale] :
         worksheet = self._workBook[sheetName]
-        rowsIterator = worksheet.iter_rows(min_row=startRow, max_row=rowsNumToExtract + startRow, values_only=True)
         
         extractedData : list[Sale] = []
 
-        rowExcelIndex = startRow
-        for row in rowsIterator :
-            extractedRow = self._extractCellsFromRow(row,rowExcelIndex)
+        for rowIndex in range(startRow,rowsNumToExtract ):
+            extractedRow = self._extractCellsFromRow(worksheet,rowIndex)
             extractedData.append(extractedRow)
-            rowExcelIndex = rowExcelIndex + 1
 
         return self._transformer.transformData(extractedData)    
 
@@ -30,12 +27,14 @@ class ExcelExtractor(data_extractor.Extractor) :
     def close_data_source(self) :
         self._workBook.close()
 
-    def _extractCellsFromRow(self,row,rowIndex) :
+    def _extractCellsFromRow(self,worksheet,rowIndex) :
+
         extractedRow = {}
         for column in self._columns :
-            cellId = column+rowIndex
-            columnName = ExcelDataColumnsDict[column]
-            extractedRow[columnName] = row[cellId]
+            excelColumnName = ExcelDataColumnsDict[column]
+            cellId = "{0}{1}".format(excelColumnName , rowIndex)
+            extractedRow[column.value] = worksheet[cellId].value
+
         return extractedRow
         
 

@@ -5,8 +5,8 @@ from models.sales_model import Sale
 
 class CsvExtractor(data_extractor.Extractor) :
 
-    def __init__(self,columnsNames) :
-        self._columnsNames = columnsNames
+    def __init__(self,columnsNames : list) :
+        self._columnsNames = [column.value for column in columnsNames]
         self._transformer = CsvTransformer()
         
 
