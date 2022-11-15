@@ -1,13 +1,15 @@
 CREATE TABLE `Sales` (
-  `id` int PRIMARY KEY Default CURRENT_TIMESTAMP,
+  `id` int PRIMARY KEY AUTO_INCREMENT,
   `sale_date` Date,
   `country` varchar(50),
   `sale_profit` float,
   `sale_status` int ,
   `product_code` Varchar(30),
   `sale_quantity` int,
-  `postal_code` int
+  `postal_code` varchar(50)
 );
+
+Drop Table Sales;
 
 CREATE TABLE `Countries` (
   `country_code` int PRIMARY KEY,

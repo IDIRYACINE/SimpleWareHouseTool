@@ -6,8 +6,7 @@ from core.sql_server import DatabaseAuthObject
 
 
 def getSampleDataDirectory():
-    os.chdir("../sampleData")
-    return os.getcwd()
+    return os.getcwd() + "/sampleData"
 
 
 def getRootDirectory():
@@ -31,10 +30,11 @@ def timestampToDate(timestamp):
     return datetime.localtime(timestamp)
 
 
-def loadIniFile(filename):
+def loadIniFile():
+    fileName = getRootDirectory() + "/config.ini"
     import configparser
     config = configparser.ConfigParser()
-    config.read(filename)
+    config.read(fileName)
     return config
 
 

@@ -10,14 +10,16 @@ class CsvExtractor(data_extractor.Extractor) :
         self._transformer = CsvTransformer()
         
 
-    def extract_data(self,startRow, rowsNumToExtract) -> list[Sale] :
+    def extract_data(self, sheetName ,startRow, rowsNumToExtract) -> list[Sale] :
         if(self._dataSourceFile == None) :
             return None
+      
         extracted_data =  pd.read_csv(
             self._dataSourceFile, 
-            nrows=rowsNumToExtract,
-            skiprows=startRow,
-            usecols = self._columnsNames
+            sep=',',
+            usecols = self._columnsNames,
+            nrows=rowsNumToExtract ,
+            skiprows=[startRow],
         )
 
         return self._transformer.transformData(extracted_data)

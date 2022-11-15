@@ -89,17 +89,28 @@ class SqlServer(ISqlServer):
 
     def _salesListToInsertQuery(self, sales: list[sales_model.Sale]) -> str:
         query = "INSERT INTO Sales (sale_quantity, postal_code, sale_profit, sale_date, sale_status, country,product_code) VALUES "
+        
+        saleIndex = 0
+
         for sale in sales:
-            query += "({0}, '{1}', '{2}', '{3}', {4}, '{5}','{6}'),".format(
+            postal_code = 51247.0
+            if(sale.postal_code != '') :
+                postal_code = sale.postal_code
+
+            query += "({0}, '{1}', '{2}', '{3}', '{4}', '{5}','{6}')".format(
                 sale.quantity,
-                sale.postal_code,
+                postal_code,
                 sale.sales,
                 sale.date,
                 sale.status,
                 sale.country,
                 sale.product_code
             )
-            print(query)
+            if(saleIndex != len(sales) - 1):
+                query = query + ","
+            saleIndex = saleIndex + 1
+        query = query + ";"    
+        print(query)
         return query[:-1]
 
 

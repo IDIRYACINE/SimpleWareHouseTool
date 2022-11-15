@@ -16,12 +16,18 @@ class ExcelTransformer():
     def _transformExcelRow(self,excelRow) :
         
         date = excelRow[RawSaleColumnNames.ORDERDATE.value]
-        if (date is str) :
+        if(isinstance(date,str)):
             date = utility.strToDate(date)
-        
+
+        hour = '{0}.{1}'.format(date.hour,date.minute)
+        date = datetime.date(date.year,date.month,date.day)
+
         quantity = excelRow[RawSaleColumnNames.QUANTITYORDERED.value]
         sales = excelRow[RawSaleColumnNames.SALES.value]
+
         status = excelRow[RawSaleColumnNames.STATUS.value]
+        status = utility.statusToCode(status)
+
         product_code = excelRow[RawSaleColumnNames.PRODUCTCODE.value]
         state = excelRow[RawSaleColumnNames.STATE.value]
         country = excelRow[RawSaleColumnNames.COUNTRY.value]

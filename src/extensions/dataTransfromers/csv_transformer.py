@@ -1,6 +1,7 @@
 from core import utility
 import pandas as pd
 from models import sales_model
+import datetime
 
 class CsvTransformer(): 
 
@@ -13,9 +14,11 @@ class CsvTransformer():
         return transformedData
 
     def _transformCsvRow(self,csvRow) :
-        date = utility.strToDate(csvRow.ORDERDATE)
-        date = utility.dateToTimestamp(date)
-
+        date = csvRow.ORDERDATE
+        if(isinstance(date,str)):
+            date = utility.strToDate(date)
+        date = datetime.date(date.year,date.month,date.day)
+        
         quantity = csvRow.QUANTITYORDERED
         sales = csvRow.SALES
         status = utility.statusToCode(csvRow.STATUS)

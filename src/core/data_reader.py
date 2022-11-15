@@ -6,13 +6,12 @@ import pathlib
 
 def get_exctractor(filename: str , importedColumns:list) -> data_extractor.Extractor :
     ext = pathlib.Path(filename).suffix
-    
     dataExctractor = None
 
     if (ext == ".xlsx"):
         dataExctractor = excel_exctractor.ExcelExtractor(importedColumns)
 
     if (ext == ".csv"):
-        dataExctractor = csv_extractor.CsvExctractor(importedColumns)
+        dataExctractor = csv_extractor.CsvExtractor(importedColumns)
 
     return dataExctractor

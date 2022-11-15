@@ -1,13 +1,10 @@
-
 from extensions.dataExtractors.data_extractor import Extractor
 from core import utility
 from core import data_reader
 from core.sql_server import SqlServer
 from models.special_values import RawSaleColumnNames
 
-dataSourcesDirectory = utility.getSampleDataDirectory()
-
-
+# Configs Initialization
 importedColumns = [
     RawSaleColumnNames.PRICEEACH, 
     RawSaleColumnNames.QUANTITYORDERED,
@@ -21,16 +18,26 @@ importedColumns = [
     RawSaleColumnNames.POSTALCODE
     ]
 
-dataFile = dataSourcesDirectory + "/sales_data.xlsx"
+configs = utility.loadIniFile()
+dataSourcesDirectory = utility.getSampleDataDirectory()
+
+sessionConfigs = configs['Session']
+dataFile = dataSourcesDirectory + "/" + sessionConfigs["dataSource"]
+# Exctract  And Process Data
 dataExctractor : Extractor = data_reader.get_exctractor(dataFile,importedColumns)
 dataExctractor.open_data_source(dataFile)
-transformedData = dataExctractor.extract_data('IDIr',2, 10)
 
-configFilePath = utility.getRootDirectory() + "/config.ini"
-configs = utility.loadIniFile(configFilePath)
+transformedData = dataExctractor.extract_data(
+    sessionConfigs["dataSheet"],
+    int(sessionConfigs["startRow"]), 
+    int(sessionConfigs["endRow"])
+    )
 
+
+# Connect to the database
 databaseAuth = utility.authObjectFromConfig(configs)
 myDatabase = SqlServer()
 myDatabase.connect(databaseAuth)
 
+# Insert data into the database
 myDatabase.executeInsertQuery(transformedData)
