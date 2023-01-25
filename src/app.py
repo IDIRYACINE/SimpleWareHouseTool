@@ -20,8 +20,7 @@ importedColumns = [
 
 configs = utility.loadIniFile()
 dataSourcesDirectory = utility.getSampleDataDirectory()
-
-sessionConfigs = configs['Session']
+sessionConfigs = configs["Session"]
 dataFile = dataSourcesDirectory + "/" + sessionConfigs["dataSource"]
 # Exctract  And Process Data
 dataExctractor : Extractor = data_reader.get_exctractor(dataFile,importedColumns)

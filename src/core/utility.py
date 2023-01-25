@@ -6,7 +6,7 @@ from core.sql_server import DatabaseAuthObject
 
 
 def getSampleDataDirectory():
-    return os.getcwd() + "/sampleData"
+    return os.getcwd() + "/SimpleWareHouseTool/sampleData"
 
 
 def getRootDirectory():
@@ -31,10 +31,12 @@ def timestampToDate(timestamp):
 
 
 def loadIniFile():
-    fileName = getRootDirectory() + "/config.ini"
+    fileName = getRootDirectory() + "/SimpleWareHouseTool/config.ini"
+
     import configparser
     config = configparser.ConfigParser()
     config.read(fileName)
+    print(fileName)
     return config
 
 
