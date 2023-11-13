@@ -1,39 +1,38 @@
-CREATE TABLE `Sales` (
+CREATE TABLE IF NOT EXISTS  `Sales` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `sale_date` Date,
-  `country` varchar(50),
+  `country_code` int,
   `sale_profit` float,
   `sale_status` int ,
   `product_code` Varchar(30),
   `sale_quantity` int,
-  `postal_code` varchar(50)
+  `postal_code` int
 );
 
-Drop Table Sales;
 
-CREATE TABLE `Countries` (
+CREATE TABLE IF NOT EXISTS  `Countries` (
   `country_code` int PRIMARY KEY,
   `country_name` varchar(255)
 );
 
-CREATE TABLE `Cities` (
+CREATE TABLE IF NOT EXISTS  `Cities` (
   `postal_code` int,
   `city_name` varchar(255),
   `country_code` int,
   PRIMARY KEY (`postal_code`, `country_code`)
 );
 
-CREATE TABLE `Products` (
+CREATE TABLE IF NOT EXISTS  `Products` (
   `product_code` varchar(30) PRIMARY KEY,
   `product_name` varchar(255)
 );
 
-CREATE TABLE `Summaries` (
+CREATE TABLE IF NOT EXISTS  `Summaries` (
   `id` int Primary Key Default CURRENT_TIMESTAMP,
   `generated_date` Date ,
   `visiblity_level` int,
   `sale_date` Date,
-  `profit` float,
+  `profit` float
 
 );
 

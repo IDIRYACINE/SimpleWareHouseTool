@@ -9,4 +9,3 @@ class Sale() :
         self.country = country
         self.postal_code = postal_code
         self.product_code = product_code
-
