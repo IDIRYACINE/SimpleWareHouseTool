@@ -2,6 +2,7 @@ from core import utility
 import pandas as pd
 from models import sales_model
 import datetime
+import math
 
 class CsvTransformer(): 
 
@@ -26,6 +27,9 @@ class CsvTransformer():
         state = csvRow.STATE
         country = csvRow.COUNTRY
         postal_code = csvRow.POSTALCODE
+        if(math.isnan(postal_code)) :
+            postal_code = 51100
+      
 
         return sales_model.Sale(quantity,postal_code,sales,date,status,
     state,country,product_code)

@@ -88,7 +88,7 @@ class SqlServer(ISqlServer):
         return result
 
     def _salesListToInsertQuery(self, sales: list[sales_model.Sale]) -> str:
-        query = "INSERT INTO Sales (sale_quantity, postal_code, sale_profit, sale_date, sale_status, country,product_code) VALUES "
+        query = "INSERT INTO Sales (sale_quantity, postal_code, sale_profit, sale_date, sale_status, country_code,product_code) VALUES "
         
         saleIndex = 0
 

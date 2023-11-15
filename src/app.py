@@ -2,6 +2,7 @@ from extensions.dataExtractors.data_extractor import Extractor
 from core import utility
 from core import data_reader
 from core.sql_server import SqlServer
+from extensions.dataTransfromers.country_transformer import CountryTransformer
 from models.special_values import RawSaleColumnNames
 
 # Configs Initialization
@@ -26,11 +27,15 @@ dataFile = dataSourcesDirectory + "/" + sessionConfigs["dataSource"]
 dataExctractor : Extractor = data_reader.get_exctractor(dataFile,importedColumns)
 dataExctractor.open_data_source(dataFile)
 
+
 transformedData = dataExctractor.extract_data(
     sessionConfigs["dataSheet"],
     int(sessionConfigs["startRow"]), 
     int(sessionConfigs["endRow"])
     )
+
+countryTransformer = CountryTransformer(dataSourcesDirectory + "/" + sessionConfigs["countriesSource"])
+transformedData = countryTransformer.transformData(transformedData)    
 
 
 # Connect to the database

@@ -2,6 +2,7 @@ import datetime
 from models.sales_model import Sale
 from models.special_values import  RawSaleColumnNames
 import core.utility as utility 
+import math
 
 class ExcelTransformer(): 
     
@@ -32,6 +33,9 @@ class ExcelTransformer():
         state = excelRow[RawSaleColumnNames.STATE.value]
         country = excelRow[RawSaleColumnNames.COUNTRY.value]
         postal_code = excelRow[RawSaleColumnNames.POSTALCODE.value]
+
+        if(math.isnan(postal_code)) :
+            postal_code = 51100
 
         return Sale(quantity,postal_code,sales,date,status,
     state,country,product_code)
